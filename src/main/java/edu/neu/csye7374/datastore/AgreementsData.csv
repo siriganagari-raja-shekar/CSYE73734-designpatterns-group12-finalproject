@@ -53,3 +53,14 @@
 1820 Commonwealth Avenue Apt 16,FLAT,Urban Living Solutions,Sale,In_Person,900250.0,0.0,FamilyOfferStrategy,0.0,899250.0
 1820 Commonwealth Avenue Apt 16,FLAT,Urban Living Solutions,Rent,In_Person,45250.0,0.0,None,0.0,45250.0
 101 Elm Street Apt 100,FLAT,Sunrise Properties,Sale,In_Person,350250.0,0.0,None,1000.0,349250.0
+1000 Circa Park,STUDIO,Sunset Builders,Rent,Digital,22750.0,200.0,FamilyOfferStrategy,4550.0,18400.0
+1212 Bikaner Street,FLAT,Pine Valley Apartments,Sale,In_Person,500250.0,0.0,StudentOfferStrategy,251125.0,249125.0
+1597 Teetot Street,TOWNHOUSE,Sunset Builders,Sale,In_Person,450250.0,0.0,StudentOfferStrategy,226125.0,224125.0
+5567 Cougar Street,FLAT,Sunset Builders,Rent,Digital,27750.0,200.0,NewMemberOfferStrategy,8325.0,19625.0
+15 Boulvd St,FLAT,Sunset Builders,Sale,In_Person,500250.0,0.0,NewMemberOfferStrategy,151075.0,349175.0
+17 Boulvd St,FLAT,Blue Ridge Estates,Sale,In_Person,250250.0,0.0,FamilyOfferStrategy,51050.0,199200.0
+1111 Boulvd St,TOWNHOUSE,Greenview Realty,Rent,Digital,22750.0,200.0,FamilyOfferStrategy,4550.0,18400.0
+1405 Oak Street Apt 20,FLAT,Skyline Apartments,Sale,In_Person,145250.0,0.0,StudentOfferStrategy,73625.0,71625.0
+6969 Longwood Avenue,TOWNHOUSE,Urban Living Solutions,Sale,In_Person,100250.0,0.0,FamilyOfferStrategy,21050.0,79200.0
+2902 Pine Avenue Apt 303,TOWNHOUSE,Hilltop Realty,Sale,In_Person,380250.0,0.0,StudentOfferStrategy,191125.0,189125.0
+555 Minsk Street,TOWNHOUSE,Grizly Realty,Rent,In_Person,12750.0,0.0,FamilyOfferStrategy,2550.0,10200.0

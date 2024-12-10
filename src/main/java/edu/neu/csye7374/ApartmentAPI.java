@@ -1,5 +1,6 @@
 package edu.neu.csye7374;
 
+import java.util.UUID;
 public interface ApartmentAPI {
     String apartmentDescription();
 
@@ -11,7 +12,7 @@ public interface ApartmentAPI {
 
     double getApartmentPrice();
 
-    public int getApartmentId();
+    public UUID getApartmentId();
     
     public double getApartmentRentPrice();
     

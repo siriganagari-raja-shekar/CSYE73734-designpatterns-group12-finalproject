@@ -5,9 +5,11 @@ import edu.neu.csye7374.ApartmentCategory;
 
 import edu.neu.csye7374.Factory.*;
 
+import java.util.UUID;
+
 public class ApartmentBuilder implements BuilderAPI {
 
-    private int apartmentId;
+    private UUID apartmentId;
     private String apartmentAddress;
     private double apartmentPrice;
     private ApartmentCategory apartmentCategory;
@@ -21,11 +23,11 @@ public class ApartmentBuilder implements BuilderAPI {
         this.apartmentManagement = apartmentManagement;
     }
 
-    public int getApartmentId() {
+    public UUID getApartmentId() {
         return apartmentId;
     }
 
-    public void setApartmentId(int apartmentId) {
+    public void setApartmentId(UUID apartmentId) {
         this.apartmentId = apartmentId;
     }
 
@@ -53,7 +55,7 @@ public class ApartmentBuilder implements BuilderAPI {
         this.apartmentCategory = apartmentCategory;
     }
 
-    public ApartmentBuilder(int apartmentId, String apartmentAddress, double apartmentPrice, ApartmentCategory apartmentCategory,
+    public ApartmentBuilder(UUID apartmentId, String apartmentAddress, double apartmentPrice, ApartmentCategory apartmentCategory,
                       String apartmentManagement) {
         super();
         this.apartmentId = apartmentId;
@@ -65,7 +67,7 @@ public class ApartmentBuilder implements BuilderAPI {
 
     public ApartmentBuilder(String s) {
         String[] tokens = s.split(",");
-        this.apartmentId = Integer.parseInt(tokens[0]);
+        this.apartmentId = UUID.fromString(tokens[0]);
         this.apartmentAddress = tokens[1];
         this.apartmentPrice = Double.parseDouble(tokens[4]);
         this.apartmentCategory = ApartmentCategory.getApartmentCategory(tokens[2]);

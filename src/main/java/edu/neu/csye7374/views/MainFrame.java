@@ -148,6 +148,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void addManagementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addManagementsActionPerformed
         // TODO add your handling code here:
         AddMgmtPanel mgmtPanel = AddMgmtPanel.getInstance();
+        mgmtPanel.loadData();
         mgmtPanel.setMainFrame(this);
         mainSplitPanel.setRightComponent(mgmtPanel);
         

@@ -13,12 +13,19 @@ import edu.neu.csye7374.Decorator.CarpetingDecorator;
 import edu.neu.csye7374.Facade.ApartmentHandoverMethod;
 import edu.neu.csye7374.Facade.ApartmentAgreementFacade;
 import edu.neu.csye7374.Observer.ApartmentAgreement;
+import edu.neu.csye7374.fileUtil.FileUtil;
+import edu.neu.csye7374.fileUtil.GeneralFileUtil;
+
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.UUID;
 
 public class AgreementPanel extends javax.swing.JPanel {
     private static AgreementPanel instance=null;
@@ -27,6 +34,9 @@ public class AgreementPanel extends javax.swing.JPanel {
     private ApartmentAPI selectedApartment = null;
     private ApartmentAgreement currentAgreement = null;
     private MainFrame mainFrameRef;
+    private List<ApartmentAgreement> oldAgreements = null;
+    private String AGREEMENTS_FILE_NAME = "AgreementsData.csv";
+
     /**
      * Creates new form StartAgreementPanel
      */
@@ -269,9 +279,9 @@ public class AgreementPanel extends javax.swing.JPanel {
     private void apartmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apartmentsTableMouseClicked
         if(apartmentsTable.getSelectedRow() != -1){
             int selected = apartmentsTable.getSelectedRow();
-            int apartmentId = Integer.parseInt(apartmentsTable.getValueAt(selected, 0).toString());
+            UUID apartmentId = UUID.fromString(apartmentsTable.getValueAt(selected, 0).toString());
             for(ApartmentAPI apartment: AddApartmentsPanel.getInstance().getApartmentList()){
-                if(apartment.getApartmentId() == apartmentId){
+                if(apartment.getApartmentId().equals(apartmentId)){
                     this.selectedApartment = apartment;
                 }
             }
@@ -379,9 +389,9 @@ public class AgreementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(apartmentsTable.getSelectedRow() != -1){
             int selected = apartmentsTable.getSelectedRow();
-            int apartmentId = Integer.parseInt(apartmentsTable.getValueAt(selected, 0).toString());
+            UUID apartmentId = UUID.fromString(apartmentsTable.getValueAt(selected, 0).toString());
             for(ApartmentAPI apartment: AddApartmentsPanel.getInstance().getApartmentList()){
-                if(apartment.getApartmentId() == apartmentId){
+                if(apartment.getApartmentId().equals(apartmentId)){
                     this.selectedApartment = apartment;
                 }
             }
@@ -425,12 +435,33 @@ public class AgreementPanel extends javax.swing.JPanel {
     private javax.swing.JButton selectApartment;
     // End of variables declaration//GEN-END:variables
 
+    private Set<String> getPastApartmentAddressesFromAgreements(){
+        List<String> agreements = GeneralFileUtil.readFile(AGREEMENTS_FILE_NAME);
+
+        System.out.println("Data from file util: " + agreements.toString());
+
+        Set<String> apartmentAddresses = new HashSet();
+
+        for(String agreement: agreements){
+            apartmentAddresses.add(agreement.split(",")[0]);
+        }
+
+        return apartmentAddresses;
+
+    }
+
     private void startupTasks(){
         
+
         DefaultTableModel model = (DefaultTableModel) apartmentsTable.getModel();
         model.setRowCount(0);
-        List<ApartmentAPI> apartmentList= AddApartmentsPanel.getInstance().getApartmentList();
-        for(ApartmentAPI apartment : apartmentList){
+        List<ApartmentAPI> apartmentList= new ArrayList<>(AddApartmentsPanel.getInstance().getApartmentList());
+
+        Set<String> pastSoldApartments = getPastApartmentAddressesFromAgreements();
+
+        List<ApartmentAPI> finalApartments = apartmentList.stream().filter(a -> !pastSoldApartments.contains(a.getApartmentAddress())).toList();
+
+        for(ApartmentAPI apartment : finalApartments){
             Object[] row = new Object[6];
             
             String[] apartmentString = apartment.toString().split(",");

@@ -2,7 +2,7 @@ package edu.neu.csye7374.Facade;
 
 import edu.neu.csye7374.ApartmentAPI;
 import edu.neu.csye7374.Decorator.ApartmentDecorator;
-import edu.neu.csye7374.Decorator.Insurance;
+import edu.neu.csye7374.Decorator.InsuranceDecorator;
 import edu.neu.csye7374.Observer.ApartmentAgreement;
 
 public class ApartmentAgreementFacade {
@@ -28,7 +28,7 @@ public class ApartmentAgreementFacade {
 
 	public ApartmentAgreement apartmentAgreement() {
             ApartmentAgreement agreement = new ApartmentAgreement();
-            ApartmentDecorator insurance = new Insurance(apartment);
+            ApartmentDecorator insurance = new InsuranceDecorator(apartment);
             System.out.println(insurance);
             agreement.addApartment(insurance);
             return agreement;

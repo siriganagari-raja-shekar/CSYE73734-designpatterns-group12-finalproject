@@ -5,7 +5,7 @@ package edu.neu.csye7374;
 public class Management implements Cloneable {
     private String managementName;
     private int manufacturingYear;
-    private int noOfApartmentsSold;
+    private int noOfPropertiesSoldOrRented;
     private static Management instance;
 
     public Management() {
@@ -19,18 +19,18 @@ public class Management implements Cloneable {
         return instance;
     }
 
-    private Management(String managementName, int manufacturingYear, int noOfApartmentsSold) {
+    private Management(String managementName, int manufacturingYear, int noOfPropertiesSoldOrRented) {
         super();
         this.managementName = managementName;
         this.manufacturingYear = manufacturingYear;
-        this.noOfApartmentsSold = noOfApartmentsSold;
+        this.noOfPropertiesSoldOrRented = noOfPropertiesSoldOrRented;
     }
 
     public void setValues(String line) {
         String[] values = line.split(",");
         this.setManagementName(values[0]);
-        this.setNoOfApartmentsReleased(Integer.parseInt(values[1]));
-        this.setManufacturingYear(Integer.parseInt(values[2]));
+        this.setManufacturingYear(Integer.parseInt(values[1]));
+        this.setNoOfPropertiesSoldOrRented(Integer.parseInt(values[2]));
     }
 
     public String getManagementName() {
@@ -46,23 +46,22 @@ public class Management implements Cloneable {
         return manufacturingYear;
     }
 
-    public Management setManufacturingYear(int manufacturingYear) {
+    public void setManufacturingYear(int manufacturingYear) {
         this.manufacturingYear = manufacturingYear;
-        return this;
     }
 
-    public int getNoOfApartmentsSold() {
-        return noOfApartmentsSold;
+    public int getNoOfPropertiesSoldOrRented() {
+        return noOfPropertiesSoldOrRented;
     }
 
-    public Management setNoOfApartmentsReleased(int noOfApartmentsReleased) {
-        this.noOfApartmentsSold = noOfApartmentsReleased;
-        return this;
+    
+    public void setNoOfPropertiesSoldOrRented(int noOfPropertiesSoldOrRented) {
+        this.noOfPropertiesSoldOrRented = noOfPropertiesSoldOrRented;
     }
 
     @Override
     public String toString() {
-        return managementName + "," + manufacturingYear + "," + noOfApartmentsSold;
+        return managementName + "," + manufacturingYear + "," + noOfPropertiesSoldOrRented;
     }
 
     @Override
