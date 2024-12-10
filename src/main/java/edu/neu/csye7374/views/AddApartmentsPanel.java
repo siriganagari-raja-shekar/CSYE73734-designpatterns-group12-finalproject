@@ -13,6 +13,8 @@ import edu.neu.csye7374.fileUtil.GeneralFileUtil;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import javax.swing.table.DefaultTableModel;
 
 public class AddApartmentsPanel extends javax.swing.JPanel {
@@ -20,7 +22,7 @@ public class AddApartmentsPanel extends javax.swing.JPanel {
     private List<ApartmentAPI> apartmentList = new ArrayList<>();
     private static AddApartmentsPanel instance = null;
     private MainFrame mainFrameRef;
-    private String APARTMENTS_FILE_NAME = "ApartmentsData.txt";
+    private String APARTMENTS_FILE_NAME = "ApartmentsData.csv";
     private static String MFR_FILE_NAME = "MgmtData.csv";
 
     /**
@@ -301,28 +303,18 @@ public class AddApartmentsPanel extends javax.swing.JPanel {
     private void apartmentCreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apartmentCreateBtnActionPerformed
         // TODO add your handling code here:
         
-        int maxId = -1;
-        
-        for(ApartmentAPI apartment: apartmentList){
-           maxId = Math.max(maxId, apartment.getApartmentId());            
-        }
-        int id = maxId + 1;
+        UUID id = UUID.randomUUID();
         String name = apartmentAddress.getText();
         double price = Double.parseDouble(apartmentPrice.getText());
         String mgmt = apartmentManagement.getSelectedItem().toString();
         String category = apartmentCategory.getSelectedItem().toString();
         ApartmentCategory categoryEnumVal = ApartmentCategory.getApartmentCategory(category.toLowerCase());
 
-//        if(apartmentList.stream().map(apartment -> apartment.getApartmentId()).toList().contains("id")){
-//            JOptionPane.showMessageDialog(this, "Apartment with this ID already exists");
-//            return;
-//        }
         ApartmentBuilder apartmentBuilder = new ApartmentBuilder(id, name, price, categoryEnumVal, mgmt);
         ApartmentAPI apartment = ApartmentFactory.getInstance().getObject(apartmentBuilder);
         apartmentList.add((Apartment) apartment);
-//      OperatingSystem.getInstance().writeBooks();
 
-        String lineToFile = id + "," + name + "," + category + "," + mgmt + "," + price ;
+        String lineToFile = id + "," + name + "," + category + "," + mgmt + "," + price;
         GeneralFileUtil.writeFile(APARTMENTS_FILE_NAME, lineToFile, false);
 
         

@@ -3,9 +3,11 @@ package edu.neu.csye7374;
 import edu.neu.csye7374.Builder.ApartmentBuilder;
 import edu.neu.csye7374.Strategy.OfferStrategy;
 
+import java.util.UUID;
+
 public class Apartment implements ApartmentAPI {
 
-    public int apartmentId;
+    public UUID apartmentId;
     public String apartmentAddress;
     public double apartmentPrice;
     public ApartmentCategory apartmentCategory;
@@ -29,11 +31,11 @@ public class Apartment implements ApartmentAPI {
         this.apartmentManagement = ApartmentManagement;
     }
 
-    public int getApartmentId() {
+    public UUID getApartmentId() {
         return apartmentId;
     }
 
-    public void setApartmentId(int apartmentId) {
+    public void setApartmentId(UUID apartmentId) {
         this.apartmentId = apartmentId;
     }
 
@@ -49,7 +51,7 @@ public class Apartment implements ApartmentAPI {
         return apartmentPrice;
     }
 
-    public void setApartmentPrice(double ApartmentkPrice) {
+    public void setApartmentPrice(double apartmentPrice) {
         this.apartmentPrice = apartmentPrice;
     }
 

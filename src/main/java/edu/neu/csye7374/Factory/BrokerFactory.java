@@ -4,7 +4,7 @@ import edu.neu.csye7374.Broker;
 import edu.neu.csye7374.Builder.BuilderAPI;
 import edu.neu.csye7374.Builder.BrokerBuilder;
 
-public class BrokerFactory implements ApartmentFactoryAPI<Broker> {
+public class BrokerFactory implements FactoryAPI<Broker> {
 
     private static BrokerFactory instance; // Lazy Singleton Factory Class
 

@@ -34,8 +34,9 @@ public class AddMgmtPanel extends javax.swing.JPanel {
         return instance;
     }
 
-    private void loadData() {
+    public void loadData() {
         List<String> rawData = GeneralFileUtil.readFile(MFR_FILE_NAME);
+        mgmtList.clear();
         for (String line : rawData) {
             Management management = Management.getInstance();
             Management clone = management.clone();
@@ -78,7 +79,7 @@ public class AddMgmtPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Name", "EST Year", "noOfApartmentsSold"
+                "Name", "EST Year", "Number of Apartments Sold or Rented"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -254,15 +255,15 @@ public class AddMgmtPanel extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, "Apartment with this ID already exists");
 //            return;
 //        }
-        Management manufact = Management.getInstance();
-        Management man = manufact.clone();
-        man.setManagementName(name)
-           .setManufacturingYear(establishedYear)
-           .setNoOfApartmentsReleased(noOfApartmentsSold);
+        Management management = Management.getInstance();
+        Management man = management.clone();
+        man.setManagementName(name);
+        man.setManufacturingYear(establishedYear);
+        man.setNoOfPropertiesSoldOrRented(noOfApartmentsSold);
         
         mgmtList.add(man);
         
-        String lineToFile = name + "," + noOfApartmentsSold + "," + establishedYear;
+        String lineToFile = name + "," + establishedYear + "," + noOfApartmentsSold;
         GeneralFileUtil.writeFile(MFR_FILE_NAME, lineToFile, false);
         
         mgmtName.setText("");
@@ -301,10 +302,12 @@ public class AddMgmtPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateMgmtTable(){
+
         
         DefaultTableModel model = (DefaultTableModel) mgmtTable.getModel();
         model.setRowCount(0);
-        
+        mgmtTable.revalidate();
+
         for(Management mgmt : mgmtList){
             Object[] row = new Object[4];
             
@@ -316,5 +319,7 @@ public class AddMgmtPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
+
+
     }
 }

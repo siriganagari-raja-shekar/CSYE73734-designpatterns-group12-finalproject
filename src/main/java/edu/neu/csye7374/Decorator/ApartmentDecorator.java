@@ -1,5 +1,7 @@
 package edu.neu.csye7374.Decorator;
 
+import java.util.UUID;
+
 import edu.neu.csye7374.*;;
 
 public class ApartmentDecorator implements ApartmentAPI {
@@ -48,7 +50,7 @@ public class ApartmentDecorator implements ApartmentAPI {
 	}
 
     @Override
-    public int getApartmentId() {
+    public UUID getApartmentId() {
         return this.decoratedApartment.getApartmentId();
     }
 

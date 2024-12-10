@@ -3,8 +3,8 @@ package edu.neu.csye7374.Decorator;
 import edu.neu.csye7374.Apartment;
 import edu.neu.csye7374.ApartmentAPI;
 
-public class Insurance extends ApartmentDecorator {
-    public Insurance(ApartmentAPI decoratedApartment) {
+public class InsuranceDecorator extends ApartmentDecorator {
+    public InsuranceDecorator(ApartmentAPI decoratedApartment) {
         super(decoratedApartment);
         // TODO Auto-generated constructor stub
     }

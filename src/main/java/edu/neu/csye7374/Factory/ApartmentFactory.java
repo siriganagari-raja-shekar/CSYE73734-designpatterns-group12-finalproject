@@ -4,7 +4,7 @@ import edu.neu.csye7374.Apartment;
 import edu.neu.csye7374.Builder.ApartmentBuilder;
 import edu.neu.csye7374.Builder.BuilderAPI;
 
-public class ApartmentFactory implements ApartmentFactoryAPI<Apartment> {
+public class ApartmentFactory implements FactoryAPI<Apartment> {
 
 	private static ApartmentFactory instance = new ApartmentFactory(); // Eager Singleton Factory Class
 

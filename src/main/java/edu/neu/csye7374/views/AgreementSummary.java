@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.swing.JOptionPane;
 
@@ -26,6 +27,7 @@ public class AgreementSummary extends javax.swing.JPanel {
     private ApartmentAgreement currentAgreement= null;
     private String ORDERS_FILE_NAME = "AgreementsData.csv";
     private String EMP_FILE_NAME = "BrokerData.csv";
+    private String MGMT_FILE_NAME = "MgmtData.csv";
     private MainFrame mainFrameRef;
     private Map<String, String> discountTypesNameMapping;
     private String[] discountTypeKeys;
@@ -344,10 +346,30 @@ public class AgreementSummary extends javax.swing.JPanel {
                             + "," + this.finalAgreementCost.getText();
         GeneralFileUtil.writeFile(ORDERS_FILE_NAME, lineToFile, false);
         saveBrokers();
+        modifyManagementData(this.apartmentMgmt.getText());
         JOptionPane.showMessageDialog(this, "Agreement Confirmed Successfully");
         this.mainFrameRef.getMainSplitPanel().setRightComponent(AgreementHistory.getInstance());
         this.discountTypes.setSelectedItem(0);
     }//GEN-LAST:event_confirmAgreementBtnActionPerformed
+
+    private void modifyManagementData(String mgmtName){
+        List<String> managementStrings = GeneralFileUtil.readFile(MGMT_FILE_NAME);
+        List<Management> managements = managementStrings.stream().map(s -> {
+            Management mg =  new Management();
+            mg.setValues(s);
+            return mg;
+        }).toList(); 
+        Management mgmt = managements.stream().filter(m -> m.getManagementName().equals(mgmtName)).findFirst().get();
+        mgmt.setNoOfPropertiesSoldOrRented(mgmt.getNoOfPropertiesSoldOrRented() + 1);
+        
+        managementStrings = managements.stream().map(m -> m.toString()).toList();
+
+        String finalString = String.join("\n", managementStrings);
+
+
+        GeneralFileUtil.writeFile(MGMT_FILE_NAME, finalString, true);
+
+    }
 
     private void discountTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discountTypesActionPerformed
         // TODO add your handling code here:
@@ -399,10 +421,10 @@ public class AgreementSummary extends javax.swing.JPanel {
     }
 
     void setLabelValues() {
-        int apartmentId = this.selectedApartment.getApartmentId();
+        UUID apartmentId = this.selectedApartment.getApartmentId();
         ApartmentAPI sApartment= null;
         for(ApartmentAPI apartment:AddApartmentsPanel.getInstance().getApartmentList()){
-            if(apartment.getApartmentId() == apartmentId){
+            if(apartment.getApartmentId().equals(apartmentId)){
                 sApartment=apartment;
             }
         }
