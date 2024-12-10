@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import edu.neu.csye7374.Adapter.ApartmentToPropertyAdapter;
 import edu.neu.csye7374.Builder.ApartmentBuilder;
 import edu.neu.csye7374.Builder.BrokerBuilder;
 import edu.neu.csye7374.Command.Invoker;
@@ -119,7 +120,7 @@ public class ApartmentDealership{
         System.out.println("");
         System.out.println("----------- Adapter Pattern using Apartment ------------");
         System.out.println("");
-        ManagementObjectAdapter managementAdapter = new ManagementObjectAdapter(apartment, man);
+        ApartmentToPropertyAdapter managementAdapter = new ApartmentToPropertyAdapter(apartment);
 
         System.out.println(managementAdapter);
         System.out.println("");
